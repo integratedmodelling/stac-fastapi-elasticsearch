@@ -38,7 +38,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
     hostname: elasticsearch
     environment:
-      ES_JAVA_OPTS: -Xms512m -Xmx1g
+      node.name: es01
+      ES_JAVA_OPTS: -Xms1024m -Xmx1g
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./elasticsearch/snapshots:/usr/share/elasticsearch/snapshots
@@ -55,11 +56,11 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
     hostname: elasticsearch
     environment:
-      ES_JAVA_OPTS: -Xms512m -Xmx1g
+      node.name: es02
+      ES_JAVA_OPTS: -Xms1024m -Xmx1g
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./elasticsearch/snapshots:/usr/share/elasticsearch/snapshots
-  wait_until_ready:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
-    command: /usr/bin/true
-    depends_on: {"elasticsearch-01": {"condition": "service_healthy"}}
+    depends_on:
+      elasticsearch-01:
+        condition: service_healthy

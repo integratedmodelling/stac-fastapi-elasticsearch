@@ -1,14 +1,14 @@
 ## Cluster Settings
 cluster.name: stac-cluster
-node.name: es01
 network.host: 0.0.0.0
 transport.host: 0.0.0.0
-discovery.type: single-node
+discovery.type: multi-node
 http.port: 9200
+discovery.seed_hosts: es01,es02
+cluster.initial_master_nodes: es01,es02
 
 path:
-  repo:
-    - /usr/share/elasticsearch/snapshots
+  repo: /usr/share/elasticsearch/snapshots
 
 ## License
 xpack.license.self_generated.type: basic
