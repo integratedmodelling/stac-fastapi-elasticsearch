@@ -31,7 +31,7 @@ services:
     depends_on:
       - elasticsearch-01
     command:
-      bash -c "./scripts/wait-for-it-es.sh es-container:9200 && python -m stac_fastapi.elasticsearch.app"
+      bash -c "./scripts/wait-for-it-es.sh es-container-01:9200 && python -m stac_fastapi.elasticsearch.app"
 
   elasticsearch-01:
     container_name: es-container-01
